@@ -9,7 +9,7 @@ public class WaterSortSearch extends GenericSearch{
 		 Problem problem = new Problem(initialState);
 		 System.out.print(problem.getInitialNode());
 		 switch (strategy.toLowerCase()) {
-         case "bfs":
+         case "bfss":
              dataContainer = new QueueContainer();  
              break;
          case "df":
