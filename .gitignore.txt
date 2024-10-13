@@ -1,6 +1,9 @@
 # Ignore compiled Java files
 *.class
 
+# Ignore the bin directory
+/bin/
+
 # Ignore the code directory
 /code/
 
