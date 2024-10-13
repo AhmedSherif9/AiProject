@@ -1,3 +1,9 @@
+# Ignore compiled Java files
+*.class
+
+# Ignore the code directory
+/code/
+
 # Eclipse specific files
 /.project
 /.classpath
@@ -5,12 +11,6 @@
 bin/
 target/
 .out/
-
-# Java build files
-*.class
-*.jar
-*.war
-*.ear
 
 # Log files
 *.log
