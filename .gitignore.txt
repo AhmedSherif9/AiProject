@@ -1,0 +1,25 @@
+# Eclipse specific files
+/.project
+/.classpath
+/.settings/
+bin/
+target/
+.out/
+
+# Java build files
+*.class
+*.jar
+*.war
+*.ear
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Backup files
+*.orig
