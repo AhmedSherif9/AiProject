@@ -1,28 +1,18 @@
-# Ignore compiled Java files
+# Ignore compiled Java class files
 *.class
 
 # Ignore the bin directory
 /bin/
 
-# Ignore the code directory
-/code/
-
-# Eclipse specific files
+# Ignore Eclipse specific files
 /.project
 /.classpath
 /.settings/
-bin/
-target/
-.out/
 
-# Log files
+# Ignore log files and temporary files
 *.log
-
-# Temporary files
 *.tmp
 *.temp
 *.bak
 *.swp
-
-# Backup files
 *.orig
