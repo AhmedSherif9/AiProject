@@ -37,7 +37,7 @@ public class GenericSearch {
                 return node;
             }
             
-            if(node.getDepth() != level) {
+            if(node.getDepth() < level) {
             	List<Node> children = problem.expand(node);
                 problem.setExpansionCount(); //incrementing the count by 1
             
