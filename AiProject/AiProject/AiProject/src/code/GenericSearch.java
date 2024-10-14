@@ -17,12 +17,14 @@ public class GenericSearch {
             }
 
             List<Node> children = problem.expand(node);
+            problem.setExpansionCount(); //incrementing the count by 1
             
             for (Node child : children) {
                 dataContainer.add(child);
             }
         }
     }
+    
     public Node depthLimitedSearch(Problem problem, int limit, DataContainer dataContainer) {
         dataContainer.add(problem.getInitialNode());
 

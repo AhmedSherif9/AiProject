@@ -3,7 +3,7 @@ package code;
 import java.util.Stack;
 
 public class WaterSortSearch extends GenericSearch{
-	public static String  solve(String initialState,String strategy,boolean visualize) {
+	public static String solve(String initialState,String strategy,boolean visualize) {
 		 DataContainer dataContainer;
 		 GenericSearch gs = new GenericSearch();
 		 Problem problem = new Problem(initialState);
@@ -22,9 +22,10 @@ public class WaterSortSearch extends GenericSearch{
              return iterativeDeepeningSearch(problem, visualize);  
          default:
              throw new IllegalArgumentException("Unknown strategy: " + strategy);
-     }
+    }
 		 Node solution = gs.search(problem, dataContainer);
-		 return result(solution) ;
+		 System.out.println(problem.getExpansionCount());
+		 return result(solution, problem);
 	}
 	public static String iterativeDeepeningSearch(Problem problem, boolean visualize) {
 	    GenericSearch gs = new GenericSearch();  // Use GenericSearch
@@ -35,7 +36,7 @@ public class WaterSortSearch extends GenericSearch{
 	        Node result = gs.depthLimitedSearch(problem, depthLimit, dataContainer);
 
 	        if (result != null) {
-	            return result(result);  // Return the solution if found
+	            return result(result, problem);  // Return the solution if found
 	        }
 
 	        depthLimit++;  // Increase depth limit and try again
@@ -60,17 +61,17 @@ public class WaterSortSearch extends GenericSearch{
 	    return null;  
 	}
 
-	public static String result(Node node) {
+	public static String result(Node node, Problem problem) {
 		if(node == null) {
 			return "NOSOLUTION";
 		}
 		else 
 		{
-			return plan(node);
+			return plan(node, problem);
 			
 		}
 	}
-	public static String plan(Node node) {
+	public static String plan(Node node, Problem problem) {
 	    Stack<String> stack = new Stack<>();
 	    while (node.getParent() != null) {
 	        stack.push(node.getOperator());  
@@ -86,10 +87,11 @@ public class WaterSortSearch extends GenericSearch{
 	    }
 
 	    return result.toString();}  
+	
 	 public static void main(String[] args) {
 	        // Example problem initialization
 		 String grid0 = "5;4;b,y,r,b;b,y,r,r;y,r,b,y;e,e,e,e;e,e,e,e;";
-	        String result = solve(grid0,"bf",true);
+	        String result = solve(grid0,"df",true);
 	        System.out.print(result);
 
 	       

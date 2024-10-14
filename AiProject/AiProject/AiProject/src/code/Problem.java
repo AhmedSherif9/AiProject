@@ -9,11 +9,13 @@ import java.util.Stack;
 public class Problem {
     
 private Node initialNode;
+private int expansionCount;
     
     public Problem(String init) {
         parseProblem(init);
-        
+        expansionCount = 0;
     }
+    
     public Node getInitialNode(){
         return initialNode;
     }
@@ -40,7 +42,7 @@ private Node initialNode;
             String[] colors = parts[i].split(","); 
             for (int j = colors.length-1;j>=0;j--) {
                 if (!colors[j].equals("e")) { 
-                    bottles[i - 2].getColors().push(Color.fromChar(colors[j].charAt(0))); 
+                    bottles[i - 2].getColors().push(Color.fromChar(colors[j].charAt(0)));
                 }
             }
         }
@@ -177,10 +179,14 @@ private Node initialNode;
         }
         return stateBuilder.toString();
     }
-
-
-
-
+    
+    public int getExpansionCount() {
+    	return expansionCount;
+    }
+    
+    public void setExpansionCount() {
+    	expansionCount++;
+    }
     
 }
 
