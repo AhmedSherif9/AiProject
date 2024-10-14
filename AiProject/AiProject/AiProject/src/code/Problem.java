@@ -96,9 +96,9 @@ private int expansionCount;
         List<Node> children = new ArrayList<>();
 
         // Iterate over all pairs of bottles
-        for (int i = 0; i < node.getBottles().length; i++) {
-            for (int j = 0; j < node.getBottles().length; j++) {
-                if (i != j && canPour(node.getBottles()[i], node.getBottles()[j])) {
+        for (int i = 0; i < node.getBottles().length - 1; i++) {
+            for (int j = i + 1; j < node.getBottles().length; j++) {
+                if (canPour(node.getBottles()[i], node.getBottles()[j])) {
                     // Deep copy the bottles to avoid modifying the original node's bottles
                     Bottle[] newBottles = deepCopyBottles(node.getBottles());
 
@@ -116,7 +116,38 @@ private int expansionCount;
                         visitedStates.add(state);  // Mark the state as visited
 
                         // Create the operator string
-                        String operator = "pour(" + i + "," + j + ")";
+                        String operator = "pour_"+i+"_"+j;
+
+                        // Create a new child node with the modified bottles
+                        Node child = new Node(newBottles, node, node.getDepth() + 1, node.getPathCost() + 1, operator);
+
+                        // Debug print to verify correct state generation
+                        System.out.println("Generated child with state: " + state);
+
+                        // Add the child node to the list of children
+                        children.add(child);
+                      
+                    }
+                }
+                if (canPour(node.getBottles()[j], node.getBottles()[i])) {
+                    // Deep copy the bottles to avoid modifying the original node's bottles
+                    Bottle[] newBottles = deepCopyBottles(node.getBottles());
+
+                    // Perform as many valid pours as possible from bottle i to bottle j
+                    while (canPour(newBottles[j], newBottles[i])) {
+                        Color poppedColor = newBottles[j].getColors().pop();
+                        newBottles[i].getColors().push(poppedColor);
+                    }
+
+                    // Generate the state string for this new configuration
+                    String state = stateToString(newBottles);
+
+                    // Ensure this state hasn't been visited yet
+                    if (!visitedStates.contains(state)) {
+                        visitedStates.add(state);  // Mark the state as visited
+
+                        // Create the operator string
+                        String operator = "pour_"+j+"_"+i;
 
                         // Create a new child node with the modified bottles
                         Node child = new Node(newBottles, node, node.getDepth() + 1, node.getPathCost() + 1, operator);

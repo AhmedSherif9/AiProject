@@ -17,11 +17,14 @@ public class GenericSearch {
             }
 
             List<Node> children = problem.expand(node);
-            problem.setExpansionCount(); //incrementing the count by 1
+            if (!children.isEmpty()) {
+            	problem.setExpansionCount(); //incrementing the count by 1
+            }
             
             for (Node child : children) {
                 dataContainer.add(child);
             }
+           
         }
     }
     
@@ -39,7 +42,9 @@ public class GenericSearch {
             
             if(node.getDepth() < level) {
             	List<Node> children = problem.expand(node);
-                problem.setExpansionCount(); //incrementing the count by 1
+            	 if (!children.isEmpty()) {
+                 	problem.setExpansionCount(); //incrementing the count by 1
+                 }
             
                 for (Node child : children) {
                 	dataContainer.add(child);
