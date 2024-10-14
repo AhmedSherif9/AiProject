@@ -1,24 +1,28 @@
 package code;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.List;
 
 public class Node {
     private Node parent;                  
           
     private Bottle[] bottles;            
-    private int depth;                   
-    private int pathCost;    
-    private String operator;             
+    private int depth;                
+    private int pathCost;
+    private int heuristicValue;
+    private String operator;
+    
+    private static final Random random = new Random();
 
     public Node(Bottle[] bottles, Node parent, int depth, int pathCost,String operator) {
         this.bottles = bottles;         
         this.parent = parent;            
         this.depth = depth;              
-        this.pathCost = pathCost;         
+        this.pathCost = pathCost;
+        this.heuristicValue = random.nextInt(2) + 1;
         this.operator= operator;
     }
-
 
     public Node getParent() {
         return parent;
@@ -59,6 +63,10 @@ public class Node {
 
     public void setPathCost(int pathCost) {
         this.pathCost = pathCost;
+    }
+    
+    public int getHeuristicValue() {
+        return heuristicValue;
     }
     
 

@@ -18,6 +18,12 @@ public class WaterSortSearch extends GenericSearch{
          case "uc":
              dataContainer = new PriorityQueueContainer();  
              break;
+         case "gr":
+        	 dataContainer = new GreedyPriorityQueueContainer();  
+             break;
+         case "a*":
+        	 dataContainer = new AStarPriorityQueueContainer();  
+             break;
          case "id":
              return iterativeDeepeningSearch(problem, visualize);  
          default:
@@ -91,7 +97,7 @@ public class WaterSortSearch extends GenericSearch{
 	 public static void main(String[] args) {
 	        // Example problem initialization
 		 String grid0 = "5;4;b,y,r,b;b,y,r,r;y,r,b,y;e,e,e,e;e,e,e,e;";
-	        String result = solve(grid0,"df",true);
+	        String result = solve(grid0,"a*",true);
 	        System.out.print(result);
 
 	       
