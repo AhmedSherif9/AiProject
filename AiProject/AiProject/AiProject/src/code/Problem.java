@@ -63,41 +63,6 @@ private int expansionCount;
         return B.getColors().isEmpty() || A.topColor().equals(B.topColor());
     }
 
-//    public Set<Color> availableColors(Bottle x) {
-//        Set<Color> distinctColors = new HashSet<>();
-//        if (x.getColors().size() == 0) {
-//            return distinctColors; 
-//        }
-//        Stack<Color> colorsCopy = (Stack<Color>) x.getColors().clone();
-//    
-//        for (Color color : colorsCopy) {
-//            distinctColors.add(color); 
-//        }
-//        return distinctColors;
-//    }
-//    public boolean isGoal(Node x){
-//        Bottle[] b = x.getBottles();
-//        List<Color> availableColor= new ArrayList<>();
-//        for (int i = 0; i < b.length; i++) {
-//            Set<Color> eachBottle = availableColors(b[i]);
-//            if(eachBottle.size()>1){
-//                return false;
-//            }
-//            else {
-//                if(eachBottle.size()==1){
-//                   for(Color color: eachBottle){
-//                        if(availableColor.contains(color)){
-//                            return false;
-//                        }
-//                        else{
-//                            availableColor.add(color);
-//                        }
-//                   }
-//                }
-//            }
-//        }
-//        return true;
-//    }
     public boolean isGoal(Node node) {
     	Bottle[] b = node.getBottles();
     	

@@ -1,7 +1,6 @@
 package code;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.List;
 
 public class Node {
@@ -10,17 +9,13 @@ public class Node {
     private Bottle[] bottles;            
     private int depth;                
     private int pathCost;
-    private int heuristicValue;
     private String operator;
-    
-    private static final Random random = new Random();
 
     public Node(Bottle[] bottles, Node parent, int depth, int pathCost,String operator) {
         this.bottles = bottles;         
         this.parent = parent;            
         this.depth = depth;              
         this.pathCost = pathCost;
-        this.heuristicValue = random.nextInt(2) + 1;
         this.operator= operator;
     }
 
@@ -65,9 +60,31 @@ public class Node {
         this.pathCost = pathCost;
     }
     
-    public int getHeuristicValue() {
+    public int getHeuristicValue1() {
+    	int heuristicValue = 0;
+    	for(int i=0;i<bottles.length;i++) {
+    		if(	bottles[i].distinctColors() > 1) {
+    			heuristicValue += 1;
+    		}
+    	}
         return heuristicValue;
     }
+    
+    //kam loon zeyada
+    public int getHeuristicValue2() {
+    	int NoOfColors = 0;
+    	int NonEmptyBottles = 0;
+    	for(int i=0;i<bottles.length;i++) {
+    		if(bottles[i].distinctColors() > 0) {
+    			NonEmptyBottles++;
+    			NoOfColors += bottles[i].distinctColors();
+    		}
+    	}
+    	int heuristicValue = NoOfColors - NonEmptyBottles;
+        return heuristicValue;
+    }
+    
+    
     
 
     @Override

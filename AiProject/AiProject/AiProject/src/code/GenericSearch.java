@@ -25,26 +25,27 @@ public class GenericSearch {
         }
     }
     
-    public Node depthLimitedSearch(Problem problem, int limit, DataContainer dataContainer) {
+    public Node iterativeSearch(int level,Problem problem, DataContainer dataContainer) {
         dataContainer.add(problem.getInitialNode());
-
-        while (!dataContainer.isEmpty()) {
+  
+        while(true) {
+            if (dataContainer.isEmpty()) {
+                return null;
+            }
             Node node = dataContainer.remove();
-
-            // If goal is found, return it
             if (problem.isGoal(node)) {
                 return node;
             }
-
-            // Only expand if within the depth limit
-            if (node.getDepth() < limit) {
-                List<Node> children = problem.expand(node);
+            
+            if(node.getDepth() != level) {
+            	List<Node> children = problem.expand(node);
+                problem.setExpansionCount(); //incrementing the count by 1
+            
                 for (Node child : children) {
-                    dataContainer.add(child);  // Add child to the search space
-                }
-            }
-        }
-        return null;  // No solution found at this depth
+                	dataContainer.add(child);
+                }}
+         
+        	}
     }
     
 }

@@ -6,8 +6,13 @@ import java.util.Comparator;
 public class GreedyPriorityQueueContainer implements DataContainer {
     private PriorityQueue<Node> queue;
 
-    public GreedyPriorityQueueContainer() {
-        queue = new PriorityQueue<>(Comparator.comparingInt(Node::getHeuristicValue));
+    public GreedyPriorityQueueContainer(int heuristicFunctionNumber) {
+    	if(heuristicFunctionNumber == 1) {
+    		queue = new PriorityQueue<>(Comparator.comparingInt(Node::getHeuristicValue1));
+    	}
+        if(heuristicFunctionNumber == 2) {
+        	queue = new PriorityQueue<>(Comparator.comparingInt(Node::getHeuristicValue2));
+    	}
     }
 
     @Override
