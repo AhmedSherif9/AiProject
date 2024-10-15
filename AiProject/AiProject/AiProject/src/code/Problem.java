@@ -101,9 +101,11 @@ private int expansionCount;
                     Bottle[] newBottles = deepCopyBottles(node.getBottles());
 
                     // Perform as many valid pours as possible from bottle i to bottle j
+                    int pours = 0;
                     while (canPour(newBottles[i], newBottles[j])) {
                         Color poppedColor = newBottles[i].getColors().pop();
                         newBottles[j].getColors().push(poppedColor);
+                        pours++;
                     }
 
                     // Generate the state string for this new configuration
@@ -117,7 +119,7 @@ private int expansionCount;
                         String operator = "pour_"+i+"_"+j;
 
                         // Create a new child node with the modified bottles
-                        Node child = new Node(newBottles, node, node.getDepth() + 1, node.getPathCost() + 1, operator);
+                        Node child = new Node(newBottles, node, node.getDepth() + 1,node.getPathCost() + pours, operator);
 
                         // Debug print to verify correct state generation
                         System.out.println("Generated child with state: " + state);
