@@ -6,22 +6,28 @@ public class WaterSortSearch extends GenericSearch{
 	public static String solve(String initialState,String strategy,boolean visualize) {
 		if(strategy == "ID") {
 			int level = 0;
+			int maxDepthReached = -1;
 			while(true) {
 				DataContainer dataContainer = new StackContainer();
 				GenericSearch gs = new GenericSearch();
 				Problem problem = new Problem(initialState);
 				Node solution = gs.iterativeSearch(level,problem, dataContainer);
-//				 System.out.println(problem.getExpansionCount());
-				 if(solution != null) {
+				if(solution != null) {
 					 System.out.println();
 					 System.out.println(solution.printAll());
 					 return plan(solution)+";"+solution.getPathCost()+";"+problem.getExpansionCount();
 				 }
+				if(gs.getMaxDepth() == maxDepthReached) {
+					 return "NOSOLUTION";
+				}
+				if(gs.getMaxDepth() > maxDepthReached) {
+					maxDepthReached = gs.getMaxDepth();
+				}
 				 level++;
 			}
 		}
 		else {
-		 DataContainer dataContainer;
+         DataContainer dataContainer;
 		 GenericSearch gs = new GenericSearch();
 		 Problem problem = new Problem(initialState);
 //		 System.out.print(problem.getInitialNode());
@@ -69,18 +75,19 @@ public class WaterSortSearch extends GenericSearch{
 
 	    StringBuilder result = new StringBuilder();
 	    while (!stack.isEmpty()) {
-	        result.append(stack.pop());  
+	        result.append(stack.pop());
 	        if (!stack.isEmpty()) {
-	            result.append(",");  
+	            result.append(",");
 	        }
 	    }
 
 	    return result.toString();
-	    }  
+	    }
 	
-//	 public static void main(String[] args) {
-//		 String grid0 = "5;4;b,y,r,b;b,y,r,r;y,r,b,y;e,e,e,e;e,e,e,e;";
-//	     String result = solve(grid0,"id",true);
-//	     System.out.print(result);      
-//	    }
+	 public static void main(String[] args) {
+		 String grid0 = "5;4;b,y,r,b;b,y,r,r;y,r,b,y;e,e,e,e;e,e,e,e;";
+//		 String grid0 = "2;4;b,b,r,r;b,b,y,y;";
+	     String result = solve(grid0,"ID",true);
+	     System.out.print(result);
+	    }
 	}

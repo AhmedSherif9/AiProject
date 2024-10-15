@@ -1,10 +1,21 @@
 package code;
 
 import java.util.List;
+import java.util.Stack;
 
 public class GenericSearch {
+	
+	private int maxDepth;
+	
+	public GenericSearch() {
+    	maxDepth = 0;
+	}
 
-    public Node search(Problem problem, DataContainer dataContainer) {
+    public int getMaxDepth() {
+		return maxDepth;
+	}
+
+	public Node search(Problem problem, DataContainer dataContainer) {
         dataContainer.add(problem.getInitialNode());
   
         while (true) {
@@ -35,6 +46,11 @@ public class GenericSearch {
             if (dataContainer.isEmpty()) {
                 return null;
             }
+            
+            if(getMaxCurrentDepth(dataContainer) > maxDepth) {
+            	maxDepth = getMaxCurrentDepth(dataContainer);
+            }
+            
             Node node = dataContainer.remove();
             if (problem.isGoal(node)) {
                 return node;
@@ -51,6 +67,22 @@ public class GenericSearch {
                 }}
          
         	}
+    }
+    
+    public int getMaxCurrentDepth(DataContainer dataContainer) {
+    	Stack<Node> stack = new Stack<>();
+    	int max = 0;
+    	while(!dataContainer.isEmpty()) {
+    		Node node = dataContainer.remove();
+    		if(node.getDepth() > max) {
+    			max = node.getDepth();
+    		}
+    		stack.push(node);
+    	}
+    	while(!stack.isEmpty()) {
+    		dataContainer.add(stack.pop());
+    	}
+    	return max;
     }
     
 }
