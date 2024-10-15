@@ -2,6 +2,7 @@ package code;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Node {
     private Node parent;                  
@@ -93,6 +94,31 @@ public class Node {
         result.append("Node at depth: ").append(depth).append(", Path cost: ").append(pathCost).append("\n");
         for (Bottle bottle : bottles) {
             result.append(bottle.toString()).append("\n");
+        }
+        return result.toString();
+    }
+    
+    public String printAll() {
+    	Stack<String> stack = new Stack<>();
+    	Node node= this;
+    	while(node.getParent() != null) {
+    		stack.push(node.print());
+    		stack.push(node.getOperator());
+    		node = node.getParent();
+    	}
+    	stack.push(node.print());
+    
+        StringBuilder result = new StringBuilder();
+        while (!stack.isEmpty()) {
+            result.append(stack.pop()).append("\n");
+        }
+        return result.toString();
+    }
+    
+    public String print() {
+        StringBuilder result = new StringBuilder();
+        for (Bottle bottle : bottles) {
+        	result.append(bottle.getColors());
         }
         return result.toString();
     }

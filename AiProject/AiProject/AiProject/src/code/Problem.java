@@ -122,7 +122,7 @@ private int expansionCount;
                         Node child = new Node(newBottles, node, node.getDepth() + 1,node.getPathCost() + pours, operator);
 
                         // Debug print to verify correct state generation
-                        System.out.println("Generated child with state: " + state);
+//                        System.out.println("Generated child with state: " + state);
 
                         // Add the child node to the list of children
                         children.add(child);

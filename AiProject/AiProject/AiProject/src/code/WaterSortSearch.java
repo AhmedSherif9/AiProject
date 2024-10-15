@@ -11,9 +11,10 @@ public class WaterSortSearch extends GenericSearch{
 				GenericSearch gs = new GenericSearch();
 				Problem problem = new Problem(initialState);
 				Node solution = gs.iterativeSearch(level,problem, dataContainer);
-				 System.out.println(problem.getExpansionCount());
+//				 System.out.println(problem.getExpansionCount());
 				 if(solution != null) {
-//					 System.out.println(level);
+					 System.out.println();
+					 System.out.println(solution.printAll());
 					 return plan(solution)+";"+solution.getPathCost()+";"+problem.getExpansionCount();
 				 }
 				 level++;
@@ -23,7 +24,7 @@ public class WaterSortSearch extends GenericSearch{
 		 DataContainer dataContainer;
 		 GenericSearch gs = new GenericSearch();
 		 Problem problem = new Problem(initialState);
-		 System.out.print(problem.getInitialNode());
+//		 System.out.print(problem.getInitialNode());
 		 switch (strategy) {
          case "BF":
              dataContainer = new QueueContainer();  
@@ -53,7 +54,8 @@ public class WaterSortSearch extends GenericSearch{
 		 if(solution == null) {
 			 return "NOSOLUTION";
 		 }
-		 System.out.print(plan(solution)+";"+solution.getPathCost()+";"+problem.getExpansionCount());  
+		 System.out.println();
+		 System.out.println(solution.printAll()); 
 		 return plan(solution)+";"+solution.getPathCost()+";"+problem.getExpansionCount();
 		}
 	}
