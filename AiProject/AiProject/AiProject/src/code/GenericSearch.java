@@ -71,7 +71,7 @@ public class GenericSearch {
     
     public int getMaxCurrentDepth(DataContainer dataContainer) {
     	Stack<Node> stack = new Stack<>();
-    	int max = 0;
+    	int max = -1;
     	while(!dataContainer.isEmpty()) {
     		Node node = dataContainer.remove();
     		if(node.getDepth() > max) {
