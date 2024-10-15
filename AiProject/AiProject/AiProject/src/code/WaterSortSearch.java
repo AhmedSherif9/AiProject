@@ -50,10 +50,10 @@ public class WaterSortSearch extends GenericSearch{
         	 return "NOSOLUTION";
          }
 		 Node solution = gs.search(problem, dataContainer);
-		 System.out.println(problem.getExpansionCount());
 		 if(solution == null) {
 			 return "NOSOLUTION";
 		 }
+		 System.out.print(plan(solution)+";"+solution.getPathCost()+";"+problem.getExpansionCount());  
 		 return plan(solution)+";"+solution.getPathCost()+";"+problem.getExpansionCount();
 		}
 	}
