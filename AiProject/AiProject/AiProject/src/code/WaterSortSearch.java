@@ -6,7 +6,7 @@ public class WaterSortSearch extends GenericSearch{
 	public static String solve(String initialState,String strategy,boolean visualize) {
 		if(strategy == "ID") {
 			int level = 0;
-			int maxDepthReached = -1;
+			int maxDepthReachedPreviously = -1;
 			while(true) {
 				DataContainer dataContainer = new StackContainer();
 				GenericSearch gs = new GenericSearch();
@@ -16,14 +16,14 @@ public class WaterSortSearch extends GenericSearch{
 					 System.out.println();
 					 System.out.println(solution.printAll());
 					 return plan(solution)+";"+solution.getPathCost()+";"+problem.getExpansionCount();
-				 }
-				if(gs.getMaxDepth() == maxDepthReached) {
+				}
+				if(gs.getMaxDepth() == maxDepthReachedPreviously) {
 					 return "NOSOLUTION";
 				}
-				if(gs.getMaxDepth() > maxDepthReached) {
-					maxDepthReached = gs.getMaxDepth();
+				if(gs.getMaxDepth() > maxDepthReachedPreviously) {
+					maxDepthReachedPreviously = gs.getMaxDepth();
 				}
-				 level++;
+				level++;
 			}
 		}
 		else {
@@ -54,7 +54,7 @@ public class WaterSortSearch extends GenericSearch{
         	 dataContainer = new AStarPriorityQueueContainer(2);  
              break;
          default:
-        	 return "NOSOLUTION";
+        	 return "NOSOLUTIONok";
          }
 		 Node solution = gs.search(problem, dataContainer);
 		 if(solution == null) {
@@ -84,10 +84,10 @@ public class WaterSortSearch extends GenericSearch{
 	    return result.toString();
 	    }
 	
-	 public static void main(String[] args) {
-		 String grid0 = "5;4;b,y,r,b;b,y,r,r;y,r,b,y;e,e,e,e;e,e,e,e;";
+//	 public static void main(String[] args) {
+//		 String grid0 = "5;4;b,y,r,b;b,y,r,r;y,r,b,y;e,e,e,e;e,e,e,e;";
 //		 String grid0 = "2;4;b,b,r,r;b,b,y,y;";
-	     String result = solve(grid0,"ID",true);
-	     System.out.print(result);
-	    }
+//	     String result = solve(grid0,"ID",true);
+//	     System.out.print(result);
+//	    }
 	}

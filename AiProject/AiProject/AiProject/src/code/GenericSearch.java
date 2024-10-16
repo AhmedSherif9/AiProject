@@ -47,8 +47,9 @@ public class GenericSearch {
                 return null;
             }
             
-            if(getMaxCurrentDepth(dataContainer) > maxDepth) {
-            	maxDepth = getMaxCurrentDepth(dataContainer);
+            int maxCurrentDepth = getMaxCurrentDepth(dataContainer);
+            if(maxCurrentDepth > maxDepth) {
+            	maxDepth = maxCurrentDepth;
             }
             
             Node node = dataContainer.remove();
